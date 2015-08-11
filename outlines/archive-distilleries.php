@@ -1,21 +1,11 @@
 <?php
-/**
- * The template for displaying Archive pages.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package outlines
- * @since outlines 1.0
- */
 
 get_header(); ?>
 
 		<section id="primary" class="content-area">
-
-				<header class="content-header">
-					<h1 class="entry-title">News & Events</h1>
+			<header class="content-header">
+					<h1 class="entry-title">Distilleries</h1>
 				</header><!-- .entry-header -->
-
 			<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>

@@ -7,20 +7,40 @@ Description: Description
 Version: 1.0
 License: GNU General Public License
 License URI: license.txt
-Tags:
 
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/*
+Colors
+
+red		962c21
+blue	002d65
+brown	2e2620
+tan 	d0ba94
+lt tan 	ede9e1
 
 */
 
 
 /* MAIN LAYOUT */
 
+body {
+	background:url('img/bg-barrel.jpg') no-repeat center 0 #4f3f33;
+	background-size:100% auto;
+
+}
+
 #page {
 	max-width:980px;
 	margin:0 auto;
 	background:#eee;
+
+	/* flexbox sticky footer */
+	display: flex;
+  	min-height: 100vh;
+  	flex-direction: column;
+
+  	box-shadow:0 0 3em rgba(0,0,0,0.5);
 }
 #primary {
 	float: right;
@@ -29,6 +49,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
 #main {
 	overflow:auto;
 	padding-bottom:2em;
+	background:url('img/bg-texture-light.jpg') repeat 0 0 #ede8dc;
+
+	/* flexbox sticky footer */
+	 flex: 1;
 }
 #content {
 }
@@ -71,38 +95,47 @@ Use it to make something cool, have fun, and share what you've learned with othe
 }
 /* HEADER */
 #masthead {
-	
+	border-bottom:8px solid #002d65;
+	background:url('img/bg-texture-light.jpg') repeat 0 0 #ede8dc;
+	padding:0 2em;
+	position: relative;
+    z-index: 99;
 }
-#masthead hgroup {
-	padding:0.4em 1.4em;
-}
-.site-title {
+/*.site-title {
 	display:inline;
 	margin-right:2em;
 }
 .site-description {
 	display:inline;
 	font-size:1.4em;
+}*/
+#masthead .branding {
+	float:left;
+	max-width:100px;
+	margin-bottom:-30px;
 }
 
 /* Links */
-a {
-	color: royalblue;
-}
-a:visited {
-	color: purple;
+a, a:visited {
+	color: #002d65;
+	text-decoration:none;
+	transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
 }
 a:hover,
 a:focus,
 a:active {
-	color: midnightblue;
+	color: #3F83D8;
 }
 body {
-	font-family:'Verdana', 'Arial', sans-serif;
+	font-family:'Source Sans Pro', sans-serif;
 }
 h1, h2, h3, h4, h5 {
-	font-family:'Georgia', serif;
-	margin:0.2em 0 0.8em;
+	font-family:'Roboto Slab', serif;
+	font-weight: 300;
+	margin: 0.8em 0 0.4em;
+	color:#962c21;
 }
 h1 {
 	font-size:2em;
@@ -118,6 +151,10 @@ h4 {
 }
 h5 {
 	font-size:1.1em;
+}
+.section-title {
+	font-family:'Oswald', sans-serif;
+	text-transform:uppercase;
 }
 /* Alignment */
 .alignleft {
@@ -148,13 +185,12 @@ h5 {
 ----------------------------------------------- */
 
 .main-navigation {
-	clear: both;
 	display: block;
-	width: 100%;
-	background:#f7f7f7;
+	float:left;
 	text-align:center;
 	position:relative;
 	z-index:5;
+	margin: 1.3em 4% 0;
 }
 .main-navigation ul {
 	list-style: none;
@@ -168,7 +204,15 @@ h5 {
 .main-navigation a {
 	display: inline-block;
 	text-decoration: none;
-	padding:1em 1.4em;
+	padding: 0.4em 0.5em;
+    font-size: 1.1em;
+	font-family:'Oswald', sans-serif;
+	font-weight:normal;
+	color:#2e2620;
+	text-transform:uppercase;
+}
+.main-navigation a:hover {
+	color:#bc9c65;
 }
 .main-navigation ul ul {
 	-moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
@@ -232,11 +276,48 @@ h5 {
 /* =Content
 ----------------------------------------------- */
 
+
+.content-header {
+	background:url('img/bg-blue.jpg') no-repeat center 0 #002d65;
+	padding:0 2em;
+	text-align: center;
+}
+.content-header .entry-title {
+    color: #ede9e1;
+    margin: 0.3em auto 0.5em;
+    display: inline-block;
+    position:relative;
+}
+.content-header .entry-title:before {
+	content: "";
+    position: absolute;
+    left: -6.5em;
+    width: 6em;
+    height: 0;
+    top: 0.8em;
+	border-bottom:1px solid #d0ba94;
+}
+.content-header .entry-title:after {
+	content: "";
+    position: absolute;
+    right: -6.5em;
+    width: 6em;
+    height: 0;
+    top: 0.8em;
+	border-bottom:1px solid #d0ba94;
+}
+
+.site-content {
+	padding:0 4em;
+}
+body.home .site-content {
+	padding:0;
+}
 .sticky {
 }
 .hentry {
-	margin: 0 0 1.5em;
-	padding:0 2em;
+	margin: 0 0 3em;
+	/*padding:0 4em;*/
 }
 .entry-meta {
 	clear: both;
@@ -256,6 +337,67 @@ h5 {
 	clear: both;
 	margin: 0 0 1.5em;
 }
+
+
+/* Homepage ----------------------------------- */
+.home-slider .slide {
+	height:0; 
+	padding-top:40%;
+	width:100%;
+	position:relative;
+	background-size:cover;
+}
+.home-slider .slide:after {
+	content:"";
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	height:0;
+	padding-top:50%;
+	opacity:0.8;
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&amp;0+0,1+100 */
+background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+}
+.home-slider .slide .slide-content {
+	position: absolute;
+    left: 2em;
+    bottom: 2em;
+    color: #fff;
+    z-index: 5;
+    width: 50%;
+}
+.home-slider .slide .slide-title {
+	color:#fff;
+	margin: 0 0 0.4em;
+}
+.home-slider .slide .slide-content p {
+	margin-bottom:0.2em;
+}
+
+.home-statement {
+	padding:4em 2em;
+	background:url('img/bg-red-logos.jpg') no-repeat center center #962c21;
+	background-size:cover;
+	text-align:center;
+}
+.home-statement .mission-statement {
+	padding:2em 0;
+	color:#ede9e1;
+	max-width: 24em;
+    margin: 0 auto;
+}
+
+/* Pages ------------------------------ */
+
 
 
 /* =Asides

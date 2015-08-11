@@ -69,7 +69,7 @@ function outlines_setup() {
 	/**
 	 * Enable support for Post Formats
 	 */
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+	// add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
 }
 endif; // outlines_setup
 add_action( 'after_setup_theme', 'outlines_setup' );
@@ -114,3 +114,28 @@ add_action( 'wp_enqueue_scripts', 'outlines_scripts' );
  * Implement the Custom Header feature
  */
 //require( get_template_directory() . '/inc/custom-header.php' );
+
+/* Custom Post Types */
+add_action( 'init', 'create_post_type' );
+function create_post_type() {
+  register_post_type( 'distilleries',
+    array(
+      'labels' => array(
+        'name' => __( 'Distilleries' ),
+        'singular_name' => __( 'Distillery' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+    )
+  );
+	register_post_type( 'associates',
+		array(
+			'labels' => array(
+				'name' => __( 'Associates' ),
+				'singular_name' => __( 'Associate' )
+			),
+			'public' => true,
+			'has_archive' => true,
+		)
+	);
+}

@@ -15,6 +15,9 @@
 get_header(); ?>
 
 		<div id="primary" class="content-area">
+			<header class="content-header">
+				<h1 class="entry-title">News & Events</h1>
+			</header><!-- .entry-header -->
 			<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>
