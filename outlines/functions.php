@@ -139,3 +139,49 @@ function create_post_type() {
 		)
 	);
 }
+
+// Custom Image Sizes
+add_image_size( 'associates-logo', 300, 150 );
+
+add_image_size( 'distilleries-photo', 600, 400, true );
+
+function new_excerpt_more( $more ) {
+	return '... <a class="read-more" href="' . get_permalink( get_the_ID() ) . '">' . __( 'More &raquo;', 'your-text-domain' ) . '</a>';
+}
+add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+// verify urls
+function addhttp($url) {
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        $url = "http://" . $url;
+    }
+    return $url;
+}
+
+// posts per page based on CPT
+function iti_custom_posts_per_page($query)
+{
+    switch ( $query->query_vars['post_type'] )
+    {
+        case 'distilleries':
+            $query->query_vars['posts_per_page'] = 999;
+            break;
+
+        /*case 'iti_cpt_2':  // Post Type named 'iti_cpt_2'
+            $query->query_vars['posts_per_page'] = 4;
+            break;
+
+        case 'iti_cpt_3':  // Post Type named 'iti_cpt_3'
+            $query->query_vars['posts_per_page'] = 5;
+            break;*/
+
+        default:
+            break;
+    }
+    return $query;
+}
+
+if( !is_admin() )
+{
+    add_filter( 'pre_get_posts', 'iti_custom_posts_per_page' );
+}
