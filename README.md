@@ -1,2 +1,0 @@
-# tndg
-Tennssee Distillers Guild

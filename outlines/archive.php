@@ -13,7 +13,7 @@ get_header(); ?>
 		<section id="primary" class="content-area">
 
 				<header class="content-header">
-					<h1 class="entry-title">News & Events</h1>
+					<h1 class="entry-title">News & Articles</h1>
 				</header><!-- .entry-header -->
 
 			<div id="content" class="site-content" role="main">

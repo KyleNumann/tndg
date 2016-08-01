@@ -10,20 +10,45 @@ get_header(); ?>
 					<div class="slides">
 						<?php 
 
-						$fields = CFS()->get('featured_slides');
-						foreach ($fields as $field) : 
-							$imgId = $field['slide_image'];
-							$imgURL = wp_get_attachment_image_src( $imgId, 'large' );
+							/*$fields = CFS()->get('featured_slides');
+							foreach ($fields as $field) : 
+								$imgId = $field['slide_image'];
+								$imgURL = wp_get_attachment_image_src( $imgId, 'large' );*/
+
+							$args = array( 
+								'post_type' => 'distilleries',
+								// 'posts_per_page' => 2,
+								// 'nopaging' => true, 
+								'orderby' => 'rand'
+							);
+							$loop = new WP_Query( $args );
+							$i = 0;
+							while ( $loop->have_posts() ) : $loop->the_post();
+								$i++;
+								if($i <= 5):
+
+								$imgId = CFS()->get('photo');
+								$imgURL = wp_get_attachment_image_src( $imgId, 'large' );
 						?>
+
 						<div class="slide" style="background:url('<?php echo $imgURL[0]; ?>') no-repeat center center; background-size:cover;">
 						<?/*<div class="slide">*/?>
 							<?/*<img src="<?php echo $imgURL[0]; ?>">*/?>
 						   <div class="slide-content">
-						   		<h3 class="slide-title"><?=$field['slide_title'];?></h3>
-						   		<?=$field['slide_copy'];?>
+						   		<h3 class="slide-title"><?=the_title();?></h3>
+						   		<?php if(CFS()->get('slide_copy')){ 
+						   				echo CFS()->get('slide_copy');
+									} elseif(CFS()->get('description')) {
+										echo strip_tags(substr(CFS()->get('description'), 0, 160)) .'...';
+									} ?>
+						   		<?php if(CFS()->get('slide_button_url')): ?>
+						   			<div class="cta-wrap">
+						   				<a class="cta" target="_blank" href="<?=CFS()->get('slide_button_url')?>"><?=CFS()->get('slide_button_text')?></a>
+						   			</div>
+						   		<?php endif; ?>
 						   </div>
 						</div>
-						<?php endforeach; ?>
+						<?php endif; endwhile; wp_reset_postdata(); //endforeach; ?>
 					</div>
 				</div>
 				<div class="home-statement section">
@@ -58,9 +83,20 @@ get_header(); ?>
 
 									$imgId = CFS()->get('logo_colored');
 									$imgURL = wp_get_attachment_image_src( $imgId, 'associates-logo' );
+									$assURL = '';
+									if(CFS()->get('website_url')){
+										$assURL = CFS()->get('website_url');
+									}
 							?>
 
-								<div class="associates-logo" style="background:url('<?php echo $imgURL[0]; ?>') no-repeat center center; background-size:contain;"></div>
+
+								<?php if($assURL): ?>
+									<div class="associates-logo" style="background:url('<?php echo $imgURL[0]; ?>') no-repeat center center; background-size:contain;">
+										<a href="<?php echo $assURL; ?>" target="_blank" title="Visit Website"></a>
+									</div>
+								<?php else: ?>
+									<div class="associates-logo" style="background:url('<?php echo $imgURL[0]; ?>') no-repeat center center; background-size:contain;"></div>
+								<?php endif; ?>
 							<?php
 								endwhile; wp_reset_postdata();
 							?>
@@ -101,7 +137,7 @@ get_header(); ?>
 
 							</div>
 							<div class="home-sidebar col span_9">
-								<h2 class="section-title">Upcoming Events</h2>
+								<h2 class="section-title"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"></use></svg> Upcoming Events</h2>
 
 								<div class="events">
 									<?php 
@@ -129,6 +165,13 @@ get_header(); ?>
 									   </div>
 									</div>
 									<?php endif; endforeach; endwhile; wp_reset_postdata(); ?>
+								</div>
+
+								<div class="facebook-feed">
+									<!--<a href="https://www.facebook.com/jdandthestraightshot" target="_blank"><h2 class="section-title"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg> Facebook</h2></a>-->
+									<div id="facebook-content">
+										
+									</div>
 								</div>
 
 							</div>
